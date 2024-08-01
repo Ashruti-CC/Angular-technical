@@ -1,0 +1,19 @@
+.folder-wrapper {
+  background-color: #f5f5f5;
+  margin: 20px;
+  padding: 20px;
+  width: 50%;
+}
+.folder-wrapper .example-form {
+  min-width: 80%;
+  max-width: 300px;
+  width: 80%;
+}
+.folder-wrapper .example-full-width,
+.folder-wrapper .btn-block {
+  width: 80%;
+}
+
+.form-group {
+  padding-top: 5%;
+}

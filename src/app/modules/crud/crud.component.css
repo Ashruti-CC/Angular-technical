@@ -1,0 +1,25 @@
+  .table-container{
+    align-items: center;
+    padding: 3% 35%;
+  }
+  .header {
+    align-items: center;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  .header span {
+    margin-left: 1%;
+  }
+  .header .backntn {
+    margin-right: 15px;
+  }
+  table {
+    width: 100%;
+  }
+
+  .mat-header-row {
+    background: #005173;
+  }
+  .mat-header-cell {
+    color: white;
+  }

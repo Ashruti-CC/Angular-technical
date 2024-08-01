@@ -1,0 +1,40 @@
+<div class="folder-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <form class="example-form" [formGroup]="folderForm">
+      <mat-card-content>
+        <div class="form-group" *ngIf="router != '/create'">
+            <label class="center-block">Old Folder Name:
+              <input class="form-control" formControlName="oldFolderName">
+            </label>
+          </div>
+          <div *ngIf="folderForm.controls['oldFolderName'].invalid && (folderForm.controls['oldFolderName'].dirty || folderForm.controls['oldFolderName'].touched)" class="alert">
+              <div *ngIf="folderForm.controls['oldFolderName'].errors?.['required']" style="color: red;">
+              Please enter oldFolderName
+              </div>
+              <div *ngIf="folderForm.controls['oldFolderName'].errors?.['minlength'] || folderForm.controls['oldFolderName'].errors?.['maxlength']" style="color: red;">
+                Please enter old folder name should be 3 to 50 character
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="center-block">New Folder Name:
+              <input class="form-control" formControlName="newFolderName">
+            </label>
+          </div>
+          <div *ngIf="folderForm.controls['newFolderName'].invalid && (folderForm.controls['newFolderName'].dirty || folderForm.controls['newFolderName'].touched)" class="alert">
+              <div *ngIf="folderForm.controls['newFolderName'].errors?.['required']" style="color: red;">
+                    Please enter newFolderName
+            </div>
+            <div *ngIf="folderForm.controls['newFolderName'].errors?.['minlength'] || folderForm.controls['newFolderName'].errors?.['maxlength']" style="color: red;">
+                Please enter folder name should be 3 to 50 character
+            </div>
+          </div>
+      </mat-card-content>
+      <button mat-raised-button (click)="onCancel()" style="margin-right: 1%;">Cancel</button>
+      <button mat-raised-button *ngIf="router == '/create'" (click)="onAdd()" color="primary">Add</button>
+      <button mat-raised-button *ngIf="router != '/create'" (click)="onUpdate()" color="primary">Update</button>
+    </form>
+  </mat-card>
+</div>
+<div *ngIf="showLoader">
+    <span><i class="fa fa-spinner fa-spin" [ngStyle]="{'font-size': '150px'}" aria-hidden="true"></i></span>
+</div>
