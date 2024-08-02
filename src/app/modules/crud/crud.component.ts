@@ -45,6 +45,7 @@ export class CrudComponent implements OnInit {
     }
     this.path = path;
     this.loaderService.show();
+    // Calling the list api
     this.folderCrudService.list(path).subscribe((data) => {
       if(data){
         this.dataSource = data
@@ -83,6 +84,7 @@ export class CrudComponent implements OnInit {
       if (result) {
         const pathName = localStorage.getItem('folderName') + '/' + name;
         this.loaderService.show();
+        // delete api calling
         this.folderCrudService.deleteFolder(pathName).subscribe(() => {
           this.list();
           this.loaderService.hide();
@@ -99,6 +101,7 @@ export class CrudComponent implements OnInit {
       this.loaderService.show();
       this. showdbclick = true;
       localStorage.setItem('folderName', path);
+      // list api calling
       this.folderCrudService.list(path).subscribe((data) => {
         if(data){
           this.dataSource = data
@@ -120,6 +123,7 @@ export class CrudComponent implements OnInit {
   backMain() {
     let path = localStorage.getItem('folderName');
     if(path){
+      // To remove the last string till '/'
       const parts = path.split('/');
       parts.pop(); // Remove the last part
       path = parts.join('/');

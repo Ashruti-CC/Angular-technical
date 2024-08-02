@@ -70,6 +70,7 @@ export class CreateModelComponent implements OnInit {
     this.folderForm.markAllAsTouched();
     if(this.folderForm.valid) {
       this.showLoader = true;
+      // Create api calling
       this.folderCrudService.createFolder(this.folderForm.controls['newFolderName'].value).subscribe(() => {
         this.showLoader = false;
         this.route.navigate(['/list']);
@@ -82,6 +83,7 @@ export class CreateModelComponent implements OnInit {
     this.folderForm.markAllAsTouched();
     if(this.folderForm.valid) {
       this.showLoader = true;
+      // Update api calling
       this.folderCrudService.updateFolder(this.folderForm.controls['oldFolderName'].value,this.folderForm.controls['newFolderName'].value).subscribe((data) => {
         this.showLoader = false;
         this.route.navigate(['/list']);
