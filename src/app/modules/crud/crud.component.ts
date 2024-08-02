@@ -21,6 +21,7 @@ interface TableElement {
 export class CrudComponent implements OnInit {
   displayedColumns: string[] = ['name','action'];
   dataSource = new MatTableDataSource();
+  path: string = '';
   show: boolean = false;
   showdbclick: boolean = false;
 
@@ -32,10 +33,19 @@ export class CrudComponent implements OnInit {
 
   // For get all List of given folder
   list() {
-    localStorage.setItem('folderName', 'some/other');
+    let path: string = '';
+    const folderName = localStorage.getItem('folderName');
+    if(folderName && folderName != 'some/other') {
+      this.showdbclick = true;
+      path = folderName;
+    } else{
+      this.showdbclick = false;
+      localStorage.setItem('folderName', 'some/other');
+      path = 'some/other';
+    }
+    this.path = path;
     this.loaderService.show();
-    this.showdbclick = false;
-    this.folderCrudService.list('some/other').subscribe((data) => {
+    this.folderCrudService.list(path).subscribe((data) => {
       if(data){
         this.dataSource = data
         this.loaderService.hide()
@@ -85,7 +95,7 @@ export class CrudComponent implements OnInit {
   onRowDoubleClick(data: TableElement) {
     if(data.type != 'FILE') {
       const path = localStorage.getItem('folderName') + '/' + data.name;
-      debugger
+      this.path = path;
       this.loaderService.show();
       this. showdbclick = true;
       localStorage.setItem('folderName', path);
@@ -108,6 +118,14 @@ export class CrudComponent implements OnInit {
 
   // Back to main list screen
   backMain() {
-    this.list();
+    let path = localStorage.getItem('folderName');
+    if(path){
+      const parts = path.split('/');
+      parts.pop(); // Remove the last part
+      path = parts.join('/');
+      this.path = path;
+      localStorage.setItem('folderName',path);
+      this.list();
+    }
   }
 }
